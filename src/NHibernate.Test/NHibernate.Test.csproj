@@ -695,6 +695,25 @@
     <Compile Include="NHSpecificTest\BagWithLazyExtraAndFilter\Fixture.cs" />
     <Compile Include="Linq\ByMethod\DistinctTests.cs" />
     <Compile Include="Component\Basic\ComponentWithUniqueConstraintTests.cs" />
+    <Compile Include="NHSpecificTest\NH3817\Entity.cs" />
+    <Compile Include="NHSpecificTest\NH3817\Fixture.cs" />
+    <Compile Include="NHSpecificTest\NH2839\FixtureByCode.cs" />
+    <Compile Include="NHSpecificTest\NH3564\FixtureByCode.cs" />
+    <Compile Include="NHSpecificTest\NH3583\Entity.cs" />
+    <Compile Include="NHSpecificTest\NH3583\AutoFlushFixture.cs" />
+    <Compile Include="NHSpecificTest\NH3372\Entity.cs" />
+    <Compile Include="NHSpecificTest\NH3372\Fixture.cs" />
+    <Compile Include="NHSpecificTest\NH3453\Classes.cs" />
+    <Compile Include="NHSpecificTest\NH3453\Fixture.cs" />
+    <Compile Include="NHSpecificTest\NH3480\Entity.cs" />
+    <Compile Include="NHSpecificTest\NH3480\Fixture.cs" />
+    <Compile Include="NHSpecificTest\NH3634\Connection.cs" />
+    <Compile Include="NHSpecificTest\NH3634\FixtureByCode.cs" />
+    <Compile Include="NHSpecificTest\NH3487\Entity.cs" />
+    <Compile Include="NHSpecificTest\NH3487\Fixture.cs" />
+    <Compile Include="NHSpecificTest\NH3567\DomainClass.cs" />
+    <Compile Include="NHSpecificTest\NH3567\NH3567Tests.cs" />
+    <Compile Include="NHSpecificTest\NH3491\FixtureByCode.cs" />
     <Compile Include="NHSpecificTest\NH3570\BiFixture.cs" />
     <Compile Include="NHSpecificTest\NH3570\Model.cs" />
     <Compile Include="NHSpecificTest\NH3570\UniFixture.cs" />
@@ -3067,6 +3086,15 @@
     <EmbeddedResource Include="NHSpecificTest\NH1291AnonExample\Mappings.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="NHSpecificTest\NH3817\Mappings.hbm.xml" />
+    <EmbeddedResource Include="NHSpecificTest\NH3666\Mappings.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VersionTest\Db\MsSQL\ProductWithVersionAndLazyProperty.hbm.xml" />
+    <EmbeddedResource Include="NHSpecificTest\NH3754\Mappings.hbm.xml" />
+    <EmbeddedResource Include="NHSpecificTest\NH3800\Mappings.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="LazyComponentTest\Person.hbm.xml" />
     <EmbeddedResource Include="NHSpecificTest\NH3570\Mappings.hbm.xml" />
     <EmbeddedResource Include="NHSpecificTest\NH3455\Mappings.hbm.xml" />
