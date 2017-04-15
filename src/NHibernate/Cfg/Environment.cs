@@ -87,7 +87,7 @@ namespace NHibernate.Cfg
 		/// <summary> A default database catalog name to use for unqualified tablenames</summary>
 		public const string DefaultCatalog = "default_catalog";
 
-		/// <summary>The EntityMode in which set the Session opened from the SessionFactory.</summary>
+		[Obsolete("DefaultEntityMode is deprecated.")]
 		public const string DefaultEntityMode = "default_entity_mode";
 
 		/// Implementation of NH-3619 - Make default value of FlushMode configurable
@@ -181,6 +181,11 @@ namespace NHibernate.Cfg
 		public const string OrderUpdates = "order_updates";
 
 		public const string QueryModelRewriterFactory = "query.query_model_rewriter_factory";
+
+		/// <summary>
+		/// This may need to be set to 3 if you are using the OdbcDriver with MS SQL Server 2008+.
+		/// </summary>
+		public const string OdbcDateTimeScale = "odbc.explicit_datetime_scale";
 		
 		/// <summary>
 		/// If this setting is set to false, exceptions in IInterceptor.BeforeTransactionCompletion bubble to the caller of ITransaction.Commit and abort the commit.
