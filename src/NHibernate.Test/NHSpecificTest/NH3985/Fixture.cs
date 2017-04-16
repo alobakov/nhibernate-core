@@ -5,6 +5,9 @@ namespace NHibernate.Test.NHSpecificTest.NH3985
 {
 	/// <summary>
 	/// The test verifies that subsequent child sessions are not issued in already-disposed state.
+	/// Change 1
+	/// Change 2
+	/// Change 3
 	/// </summary>
 	[TestFixture]
 	public class Fixture : BugTestCase
