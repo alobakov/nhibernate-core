@@ -73,10 +73,10 @@ namespace NHibernate.Impl
 		private readonly StatefulPersistenceContext persistenceContext;
 
 		[NonSerialized]
-		private readonly ISession rootSession;
+		private readonly SessionImpl rootSession;
 
 		[NonSerialized]
-		ISession _childSession;
+		private readonly ICollection<SessionImpl> childSessions = new List<SessionImpl>();
 
 		[NonSerialized]
 		private readonly bool flushBeforeCompletionEnabled;
@@ -217,7 +217,6 @@ namespace NHibernate.Impl
 				if (interceptor == null)
 					throw new AssertionFailure("The interceptor can not be null.");
 
-				rootSession = null;
 				this.timestamp = timestamp;
 				this.interceptor = interceptor;
 				listeners = factory.EventListeners;
@@ -359,11 +358,11 @@ namespace NHibernate.Impl
 				{
 					try
 					{
-						if (_childSession != null)
+						foreach (var childSession in childSessions)
 						{
-							if (_childSession.IsOpen)
+							if (childSession.IsOpen)
 							{
-								_childSession.Close();
+								childSession.Close();
 							}
 						}
 					}
@@ -1673,9 +1672,18 @@ namespace NHibernate.Impl
 
 				// free managed resources that are being managed by the session if we
 				// know this call came through Dispose()
-				if (isDisposing && !IsClosed)
+				if (isDisposing)
 				{
-					Close();
+					if (!IsClosed)
+					{
+						Close();
+					}
+
+					// if this is a child session, notify root session about being disposed
+					if (rootSession != null)
+					{
+						rootSession.OnChildSessionDisposing(this);
+					}
 				}
 
 				// free unmanaged resources here
@@ -1687,6 +1695,11 @@ namespace NHibernate.Impl
 		}
 
 		#endregion
+
+		private void OnChildSessionDisposing(SessionImpl childSession)
+		{
+			childSessions.Remove(childSession);
+		}
 
 		private void Filter(object collection, string filter, QueryParameters queryParameters, IList results)
 		{
@@ -2221,16 +2234,11 @@ namespace NHibernate.Impl
 
 				CheckAndUpdateSessionStatus();
 
-				var childImpl = _childSession as SessionImpl;
+				log.Debug("Creating child session.");
+				var newChild = new SessionImpl(this);
+				childSessions.Add(newChild);
 
-				// if child session never existed or has already been disposed, create new
-				if (childImpl == null || childImpl.IsAlreadyDisposed)
-				{
-					log.Debug("Creating child session.");
-					_childSession = new SessionImpl(this);
-				}
-
-				return _childSession;
+				return newChild;
 			}
 		}
 
