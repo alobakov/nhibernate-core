@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace NHibernate.Test.NHSpecificTest.NH3985
 {
@@ -19,7 +20,7 @@ namespace NHibernate.Test.NHSpecificTest.NH3985
 
 				using (var childSession2 = rootSession.GetChildSession())
 				{
-					Assert.DoesNotThrow(new TestDelegate(() => { childSession2.Get<Process>(1); }));
+					Assert.DoesNotThrow(new TestDelegate(() => { childSession2.Get<Process>(Guid.NewGuid()); }));
 				}
 			}
 		}

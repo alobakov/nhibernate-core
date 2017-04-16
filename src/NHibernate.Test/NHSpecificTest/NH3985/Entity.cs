@@ -38,7 +38,7 @@ namespace NHibernate.Test.NHSpecificTest.NH3985
 
 		#endregion
 
-		public virtual int ProcessID { get; set; }
+		public virtual Guid ProcessID { get; set; }
 
 		public virtual string Name { get; set; }
 	}
