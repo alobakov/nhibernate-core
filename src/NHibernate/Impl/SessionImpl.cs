@@ -2221,7 +2221,10 @@ namespace NHibernate.Impl
 
 				CheckAndUpdateSessionStatus();
 
-				if (_childSession == null)
+				var childImpl = _childSession as SessionImpl;
+
+				// if child session never existed or has already been disposed, create new
+				if (childImpl == null || childImpl.IsAlreadyDisposed)
 				{
 					log.Debug("Creating child session.");
 					_childSession = new SessionImpl(this);
